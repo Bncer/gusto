@@ -66,7 +66,6 @@ WSGI_APPLICATION = 'gusto.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config()
 }
-print(f"connnected to: {DATABASES['default']['NAME']}")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
