@@ -1,6 +1,8 @@
 import os
 
 from pathlib import Path
+import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='SECRET_kEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -24,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'api_gusto',
+    'dishes',
 ]
 
 MIDDLEWARE = [
@@ -62,12 +64,9 @@ WSGI_APPLICATION = 'gusto.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('MONGO_ENGINE'),
-        'NAME': os.environ.get('MONGO_DATABASE'),
-    }
+    'default': dj_database_url.config()
 }
-
+print(f"connnected to: {DATABASES['default']['NAME']}")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -106,3 +105,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+django_heroku.settings(locals())
