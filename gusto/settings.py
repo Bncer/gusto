@@ -1,21 +1,24 @@
 import os
 
-from pathlib import Path
-import django_heroku
-import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from pathlib import Path
+
+import django_heroku
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+env_path = Path('.') / 'gusto/.env'
+load_dotenv(dotenv_path=env_path)
+
 SECRET_KEY = os.environ.get('SECRET_KEY', default='SECRET_kEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', default=False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.gustobistro.herokuapp.com', 'localhost', '127.0.0.1']
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,7 +67,14 @@ WSGI_APPLICATION = 'gusto.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+         'ENGINE': os.environ.get('DATABASE_ENGINE', 'django.db.backends.postgresql'),
+         'NAME': os.environ.get('DATABASE_DB'),
+         'USER': os.environ.get('DATABASE_USER'),
+         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+         'HOST': os.environ.get('DATABASE_HOST'),
+         'PORT':  os.environ.get('DATABASE_PORT'),
+   }
 }
 
 # Password validation

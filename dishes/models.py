@@ -22,8 +22,8 @@ class MenuItem(models.Model):
     category = models.CharField(max_length=128, choices=CATEGORY_CHOICES, default=0, verbose_name='category')
 
     class Meta:
-        verbose_name='menu item'
-        verbose_name_plural='menu items'
+        verbose_name='dish'
+        verbose_name_plural='dishes'
         ordering = ['category', 'name']
 
     def __str__(self):

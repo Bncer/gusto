@@ -7,6 +7,7 @@ from dishes import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'dishes', views.MenuItemViewSet)
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
