@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
+    'rest_framework.authtoken',
     'dishes',
 ]
 
@@ -75,6 +76,13 @@ DATABASES = {
          'HOST': os.environ.get('DATABASE_HOST'),
          'PORT':  os.environ.get('DATABASE_PORT'),
    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 
 # Password validation
